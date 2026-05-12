@@ -1,0 +1,57 @@
+{
+  "name": "Lucas Ariel Peralta",
+  "email": "lucasperalta.work@outlook.com",
+  "phone": "+54 9 266 486 8833",
+  "location": "Merlo, San Luis, Argentina",
+  "postalCode": "D5881",
+  "linkedin": "",
+  "github": "",
+  "website": "",
+  
+  "experience": [
+    {
+      "company": "Kiggla",
+      "title": "Senior Software Engineer",
+      "location": "Florida, US",
+      "start_date": "10/2024",
+      "end_date": "Present"
+    },
+    {
+      "company": "PuzzleHR",
+      "title": "Senior Full Stack Engineer",
+      "location": "Florida, US",
+      "start_date": "08/2021",
+      "end_date": "09/2024"
+    },
+    {
+      "company": "Nubank",
+      "title": "Full Stack Engineer",
+      "location": "Buenos Aires, Argentina",
+      "start_date": "09/2018",
+      "end_date": "05/2021"
+    },
+    {
+    "company": "Accenture Argentina",
+    "title": "Back End Developer",
+    "location": "Buenos Aires, Argentina",
+    "start_date": "09/2016",
+    "end_date": "08/2018"
+    },
+    {
+    "company": "Globant",
+    "title": "Front End Developer",
+    "location": "Buenos Aires, Argentina",
+    "start_date": "02/2015",
+    "end_date": "08/2016"
+    }
+  ],
+  
+  "education": [
+    {
+      "degree": "Bachelor's Degree, Computer Science",
+      "school": "Universidad Nacional de Río Negro (UNRN) | National University of Río Negro",
+      "start_year": "2010",
+      "end_year": "2014"
+    }
+  ]
+}

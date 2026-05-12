@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{name}} — Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --primary: #5c4a4a;
+        --primary-light: #6b5858;
+        --accent: #8b7878;
+        --warm: #c4b5b5;
+        --text-dark: #2d2424;
+        --text-medium: #4a3f3f;
+        --text-light: #6b5f5f;
+        --bg: #ffffff;
+        --bg-subtle: #faf8f8;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Garamond", "Palatino", serif;
+        font-size: 10.5pt;
+        line-height: 1.4;
+        color: var(--text-dark);
+        background: var(--bg);
+        max-width: 8.5in;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        margin-top: -15mm;
+        border-bottom: 1px solid var(--warm);
+        position: relative;
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      header h1 {
+        font-size: 26pt;
+        font-weight: 400;
+        color: var(--primary);
+        letter-spacing: 2pt;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      header .title {
+        font-size: 11pt;
+        font-weight: 400;
+        color: var(--text-medium);
+        letter-spacing: 1.5pt;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .contact {
+        font-size: 9pt;
+        color: var(--text-medium);
+        font-family: "Calibri", sans-serif;
+        letter-spacing: 0.5pt;
+      }
+
+      .contact a {
+        color: var(--primary-light);
+        text-decoration: none;
+      }
+
+      .contact-divider {
+        color: var(--warm);
+        margin: 0 10px;
+      }
+
+      /* Section Headers */
+      section {
+        margin-bottom: 14px;
+      }
+
+      section h2 {
+        font-size: 10pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--primary);
+        letter-spacing: 2pt;
+        margin-bottom: 8px;
+        font-family: "Calibri", sans-serif;
+        position: relative;
+        padding-left: 0;
+      }
+
+      section h2::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, var(--primary), transparent);
+        margin-top: 3px;
+      }
+
+      /* Summary */
+      .summary {
+        font-size: 10pt;
+        line-height: 1.55;
+        color: var(--text-medium);
+        text-align: justify;
+        padding: 10px 12px;
+        background: var(--bg-subtle);
+        border-left: 2px solid var(--warm);
+      }
+
+      /* Skills */
+      .skills-category {
+        margin-bottom: 4px;
+        line-height: 1.4;
+      }
+
+      .skills-category strong {
+        font-size: 10pt;
+        font-weight: bold;
+        color: var(--primary);
+        display: inline-block;
+      }
+
+      .skills-list {
+        font-size: 10pt;
+        color: var(--text-dark);
+      }
+
+      /* Experience */
+      .exp-item {
+        margin-bottom: 12px;
+      }
+
+      .exp-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 2px;
+      }
+
+      .exp-title {
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: var(--text-dark);
+        font-family: "Calibri", sans-serif;
+      }
+
+      .exp-dates {
+        font-size: 9pt;
+        color: var(--primary-light);
+        font-family: "Calibri", sans-serif;
+        font-style: italic;
+      }
+
+      .exp-company {
+        font-size: 10pt;
+        font-style: italic;
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+
+      .exp-details {
+        margin-left: 16px;
+        padding-left: 0;
+        font-family: "Calibri", sans-serif;
+      }
+
+      .exp-details li {
+        font-size: 10pt;
+        line-height: 1.4;
+        margin-bottom: 2px;
+        color: var(--text-dark);
+      }
+
+      .exp-details li::marker {
+        color: var(--warm);
+      }
+
+      /* Education */
+      .edu-item {
+        margin-bottom: 8px;
+      }
+
+      .edu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .edu-degree {
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: var(--text-dark);
+        font-family: "Calibri", sans-serif;
+      }
+
+      .edu-dates {
+        font-size: 9pt;
+        color: var(--primary-light);
+        font-style: italic;
+      }
+
+      .edu-school {
+        font-size: 10pt;
+        color: var(--accent);
+        font-style: italic;
+      }
+
+      /* Print */
+      @media print {
+        body {
+          padding: 0.5in 0.6in;
+        }
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>{{name}}</h1>
+      <div class="title">{{title}}</div>
+      <div class="contact">
+        {{email}}<span class="contact-divider">◆</span>
+        {{#if phone}}{{phone}}<span class="contact-divider">◆</span>{{/if}}
+        {{location}}
+        {{#if linkedin}}<span class="contact-divider">◆</span>{{linkedin}}{{/if}}
+      </div>
+    </header>
+
+    {{#if summary}}
+    <section>
+      <h2>Profile</h2>
+      <p class="summary">{{{summary}}}</p>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section>
+      <h2>Expertise</h2>
+      {{#each skills}}
+      <div class="skills-category">
+        <strong>{{formatKey @key}}:</strong>
+        <span class="skills-list">{{join this ", "}}</span>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section>
+      <h2>Professional History</h2>
+      {{#each experience}}
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">{{title}}</div>
+          <div class="exp-dates">{{start_date}} – {{end_date}}</div>
+        </div>
+        <div class="exp-company">
+          {{company}}{{#if location}}, {{location}}{{/if}}
+        </div>
+        {{#if details}}
+        <ul class="exp-details">
+          {{#each details}}
+          <li>{{{this}}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section>
+      <h2>Education</h2>
+      {{#each education}}
+      <div class="edu-item">
+        <div class="edu-header">
+          <div class="edu-degree">{{degree}}</div>
+          <div class="edu-dates">
+            {{start_year}}{{#if end_year}} – {{end_year}}{{/if}}
+          </div>
+        </div>
+        <div class="edu-school">{{school}}{{#if grade}} • GPA: {{grade}}{{/if}}</div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+  </body>
+</html>
