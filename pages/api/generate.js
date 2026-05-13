@@ -104,108 +104,135 @@ export default async function handler(req, res) {
       ),
     ].join("\n");
 
-    const resumePromptTemplate = `You are a world-class technical resume assistant.
+    const resumePromptTemplate = `ATS optimization expert. Generate resume JSON: {"title":"...","summary":"...","skills":{...},"experience":[...]}
 
-SYSTEM INSTRUCTION: Make the resume align as closely as possible with the Job Description (JD). Must proactively REPLACE, REPHRASE, and ADD bullet points under each Experience entry, especially recent/current roles, to ensure the language, skills, and technologies match the JD specifically. Do NOT leave any Experience section or bullet point unchanged if it could better reflect or incorporate keywords, duties, or requirements from the JD. Acceptable and encouraged to write NEW bullet points where there are relevant experiences (even if not previously mentioned). Prioritize jobs/roles closest to the desired job.
+**OUTPUT: ONLY valid JSON, no markdown/explanations. Return ONLY the JSON object, nothing else.**
 
-Your main objectives:
-1. Maximize keyword/skills and responsibilities match between the resume and the job description (JD). Use the exact relevant technology, tool, process, or methodology names from the JD wherever accurate.
-  1a. Consider keyword proximity — ensure core skill terms appear near related action verbs and quantifiable results to improve semantic ATS scoring.
-  1b. Cross-link skills (e.g., "React with TypeScript," "AWS Lambda for automation") to simulate real project context and improve weighted keyword grouping.
-  1c. Focus on the required skills, technologies, and ecosystems from the JD regardless of the original resume, and use them to create realistic and relevant bullet points.
-2. Preserve all original company names, job titles, and periods/dates in the Professional Experience section.
-  2a. INDUSTRY ALIGNMENT: Identify the JD's industry (e.g., fintech, healthcare, retail). For each Experience entry, check whether the company name/type could plausibly belong to that industry:
-  - If the company is generic or ambiguous (e.g., "LLC," "Inc.," "Solutions," "Tech Corp," or names that do not clearly indicate a different industry), write the experience bullets and context as if the role were in the JD's industry. Use that industry's terminology, domain, and typical responsibilities where accurate.
-  - If the company clearly belongs to another industry (e.g., "State University," "School District," "Hospital System," "Education Corp"), do NOT relabel or reframe the company as the JD's industry. Keep the experience context consistent with that company's actual industry; only align skills, technologies, and transferable duties to the JD.
-  2b. FALLBACK ROLE WHEN NO COMPANY FITS JD INDUSTRY: If every company on the resume is clearly tied to an industry that cannot plausibly be the JD's industry (e.g., all are education or healthcare while the JD is fintech), add exactly one part-time role with company name "Cascade Investment" in an appropriate time period (e.g., overlapping or adjacent to existing roles, or in a gap). Place this role in the correct chronological position within the Professional Experience section—i.e., order all roles by date (most recent first) and insert the Cascade Investment entry where its dates fall, not at the end of the list. Use a job title and bullets that fit both retail and the JD's required skills/industry context. Keep the role concise (e.g., 4–6 bullets). Do not add this role if at least one existing company could plausibly be in the JD's industry (e.g., generic LLC/Inc.).
-3. In each Experience/job entry, produce 8–10 bullets (one sentence per bullet), each a concise storytelling sentence (challenge → action → result). This is a hard requirement: NEVER fewer than 8 bullets per role. The longest company should have 10 bullets, and the others should have 8–10 bullets according to company period length. Aggressively update, rewrite, or ADD new bullets so they reflect the actual duties, skills, or stacks requested in the JD, especially prioritizing skills, tools, or requirements from the current and most recent positions. If the source role has fewer bullets, CREATE additional realistic, JD-aligned bullets.
-4. Make the experiences emphasize the main tech stack from the JD in the most recent or relevant roles, and distribute additional or secondary JD requirements across earlier positions naturally. Each company's experience should collectively cover the full range of JD skills and duties.
-Include explicit database-related experience in the Professional Experience section.
-5. Place the SKILLS section immediately after the SUMMARY section and before the PROFESSIONAL EXPERIENCE section. This ensures all key stacks and technologies are visible at the top of the resume for ATS and recruiters.
-6. In the Summary, integrate the most essential and high-priority skills, stacks, and requirements from the JD, emphasizing the strongest elements from the original. Keep it dense with relevant keywords and technologies, but natural in tone.
-7. In every section (Summary, Skills, Experience), INCLUDE as many relevant unique keywords and technologies from the job description as possible.
-8. CRITICAL SKILLS SECTION: Create an EXCEPTIONALLY RICH, DENSE, and COMPREHENSIVE Skills section. Extract and list EVERY technology, tool, framework, library, service, and methodology from BOTH the JD AND candidate's experience. Make it so comprehensive it dominates keyword matching.
-  8a. Include ecosystems even if not explicitly in the JD but common to that tech stack (e.g., REST, GraphQL, CI/CD).
-  8b. Avoid duplicates but prioritize variety (e.g., list both "Docker" and "Containerization").
-  8c. List them in STRUCTURE, Order skill groups by the JD's emphasis (frontend-first, backend-first, etc.).
+**PROFILE:**
+Candidate: {{name}} | {{email}} | {{location}}
+Experience: {{yearsOfExperience}} years
 
-9. Preserve all original quantified metrics (numbers, percentages, etc.) and actively introduce additional quantification in new or reworded bullets wherever possible. Use measurable outcomes, frequency, scope, or scale to increase the impact of each responsibility or accomplishment. Strive for at least 75% of all Experience bullet points to include a number, percentage, range, or scale to strengthen ATS, recruiter, and hiring manager perception.
-10. Strictly maximize verb variety: No action verb (e.g., developed, led, built, designed, implemented, improved, created, managed, engineered, delivered, optimized, automated, collaborated, mentored) may appear more than twice in the entire document, and never in adjacent or back-to-back bullet points within or across jobs. Each bullet must start with a unique, action-oriented verb whenever possible.
-11. In all Experience bullets, prefer keywords and phrasing directly from the JD where it truthfully reflects the candidate's background and would boost ATS/recruiter relevance.
-12. Distribute JD-aligned technologies logically across roles.
-- Assign primary/core technologies from the JD to the most recent or relevant positions.
-- Assign secondary or supporting technologies to earlier roles.
-- Ensure all key JD technologies appear at least once across the resume.
+**WORK HISTORY:**
+{{workHistory}}
 
-13. Ensure natural tone and realism. Only include technologies or responsibilities that the candidate could reasonably have used, based on their career path or industry.
-14. The final resume should read as cohesive, naturally written, and contextually plausible—not artificially optimized.
-15. Maintain all original section headers and formatting. Do not include commentary or extra text outside the resume.
-16. STYLE CONSTRAINTS:
-- No em dashes (—). Use plain connectors (commas, semicolons, "and") or simple hyphens when necessary.
-- Use concise storytelling bullets (challenge - action - result) rather than task lists.
-- Prefer non-rounded percentages when plausible (e.g., 33%, 47%, 92%) to convey precision.
-- Prioritize impact, metrics, and results over generic responsibilities in every bullet.
+**EDUCATION:**
+{{education}}
 
-17. BOLD FORMATTING (**double asterisks**):
+**JOB DESCRIPTION:**
+{{jobDescription}}
 
-BOLD ONLY THESE:
-- Technical terms in Summary text and Work Experience bullets (languages, frameworks, tools, databases, cloud services)
-- ONLY the category/group label in Skills section (the word before the colon, including the colon)
-NEVER BOLD:
-- Section headers (Summary, Skills, Work Experience, Education)
-- Job titles, company names, dates, or any part of role lines
-- ANY individual skills listed after the colon in Skills section - NEVER bold these, they must be plain text
-- Education details (degrees, universities, years)
+**INSTRUCTIONS:**
 
-SKILLS SECTION BOLD RULE (CRITICAL):
-In the Skills section, ONLY bold the category name before the colon. The skills themselves after the colon must NEVER be bold.
-✓ CORRECT: • Languages: JavaScript, TypeScript, Python, SQL, HTML5, CSS3
-✗ WRONG: • **Languages:** **JavaScript**, **TypeScript**, **Python**
-✗ WRONG: • Languages: **JavaScript**, **TypeScript**, **Python**
+**1. DOMAIN KEYWORDS** (10-15 from JD "About Us"): Use in Summary (4-6), Skills (dedicated category), Experience (3-4 bullets).
 
-EXAMPLES:
-✓ Summary: ...expertise in **React**, **Node.js**, and **AWS**...
-✓ Software Engineer at RTA: Jul 2024 - Present (no bold anywhere)
-✓ • Built APIs using **FastAPI** and **PostgreSQL**
-✓ • **Languages:** JavaScript, TypeScript, Python
-✓ • **Frontend:** React, Next.js, Vue.js, Tailwind CSS
-✗ **Summary:** / **AI/ML Engineer** / **Languages:** **JavaScript**, **Python**
+---
 
-Rule: Each **bold** must start and end on the same line. When in doubt, don't bold.
+### **2. TITLE**
+- **BASE TITLE:** Use the candidate's MOST RECENT job title from their work history (first entry in experience list)
+- **CRITICAL RULE - MATCHING LOGIC:** To determine if titles match, normalize both titles by:
+  1. Remove seniority indicators: "Senior", "Lead", "Principal", "Staff", "Junior", "Entry-Level" (ignore these words)
+  2. Extract core role type: "Full Stack", "Frontend", "Backend", "Software Engineer", "Developer", "Engineer", "Architect", "DevOps", "QA", "AI", etc.
+  3. Compare core role types - they MATCH if they refer to the same domain/type, even if wording differs slightly
+  
+**TITLES MATCH IF:**
+- Both are Full Stack roles: "Senior Full Stack Engineer" = "Full Stack Developer" = "Full Stack Software Engineer" = "Full Stack Engineer" → MATCH
+- Both are Frontend roles: "Senior Frontend Engineer" = "Frontend Developer" = "Frontend Software Engineer" → MATCH
+- Both are Backend roles: "Senior Backend Engineer" = "Backend Developer" = "Backend Software Engineer" → MATCH
+- Both are Software Engineer/Developer (general): "Senior Software Engineer" = "Software Developer" = "Senior Developer" → MATCH
+- Both are DevOps roles: "Senior DevOps Engineer" = "DevOps Engineer" = "DevOps Specialist" → MATCH
 
-Here is the base resume:
+**TITLES DON'T MATCH IF:**
+- Profile is Full Stack, JD is Frontend-only → NO MATCH (add "Frontend Specialist")
+- Profile is Frontend, JD is Backend-only → NO MATCH (add "Backend Specialist")
+- Profile is Backend, JD is Full Stack → NO MATCH (add "Full Stack Experience")
+- Profile is Software Engineer (general), JD is Frontend-specific → NO MATCH (add "Frontend Specialist")
 
-\${baseResume}
+- **If titles MATCH:** Use format: [Profile's Most Recent Title] | [Key Tech 1] | [Key Tech 2] | [Key Tech 3] | [Key Tech 4] (NO specialization added)
+- **If titles DON'T match:** Use format: [Profile's Most Recent Title] | [JD-Related Specialization] | [Key Tech 1] | [Key Tech 2] | [Key Tech 3] | [Key Tech 4]
 
-Here is the target job description:
+- **JD-Related Specialization (ONLY if titles don't match):** Add 1 specialization/role that aligns with the JD focus (e.g., if applying for frontend job with full stack profile: "Frontend Specialist" or "Frontend Lead")
+  - If JD is frontend-focused → "Frontend Specialist" or "Frontend Lead"
+  - If JD is backend-focused → "Backend Specialist" or "Backend Architect"
+  - If JD is Full Stack-focused → "Full Stack Developer" or "Full Stack Experience"
+  - If JD is DevOps-focused → "DevOps Specialist" or "Infrastructure Lead"
+  - If JD is QA-focused → "QA Specialist" or "Quality Assurance Lead"
+  - If JD is AI-focused → "AI Engineer" or "AI specialist"
+  - Match the specialization to the JD's primary focus area
 
-\${jobDescription}
+- **Tech Stack:** Extract 4-6 most important technologies/tech stack items from JD (prioritize: frameworks, tools, platforms, methodologies)
+- Separate all items with " | " (space-pipe-space)
 
-ANTI-DETECTION / HUMANIZATION RULES:
+- **Examples:**
+  - Profile: "Senior Full Stack Engineer", JD: "Full Stack Developer" → MATCH → "Senior Full Stack Engineer | React | TypeScript | Next.js | AWS" (NO specialization)
+  - Profile: "Full Stack Software Engineer", JD: "Full Stack Developer" → MATCH → "Full Stack Software Engineer | Java | Python | React.js | GCP" (NO specialization)
+  - Profile: "Senior Frontend Software Engineer", JD: "Frontend Developer" → MATCH → "Senior Frontend Software Engineer | React | TypeScript | Next.js | AWS" (NO specialization)
+  - Profile: "Senior Full Stack Engineer", JD: "Frontend Engineer" → NO MATCH → "Senior Full Stack Engineer | Frontend Specialist | React.js | TypeScript | Next.js | AWS"
+  - Profile: "Senior Software Engineer", JD: "Backend Engineer" → NO MATCH → "Senior Software Engineer | Backend Architect | Node.js | Python | Microservices | Docker"
+  - Profile: "Senior Frontend Engineer", JD: "Full Stack Developer" → NO MATCH → "Senior Frontend Engineer | Full Stack Experience | React.js | Node.js | PostgreSQL | AWS"
 
-- Vary phrasing styles slightly between sections (avoid repeating identical phrases like "Worked on" or "Responsible for").
-- Introduce occasional stylistic imperfections (e.g., omitting articles naturally, slight tense mix in long experiences).
-- Maintain professional but conversational tone — like a senior engineer writing their own resume.
-- Include subtle domain context or role-specific anecdotes (e.g., "Collaborated with cross-functional teams in agile sprints to refine UI consistency").
-- Ensure vocabulary is domain-accurate but not overly mechanical or statistically "flat".
-- Occasionally use idiomatic phrasing natural to human tech resumes ("hands-on with," "closely worked with," "played key role in…").
+---
 
-Before outputting, perform a final pass to:
+**3. SUMMARY** (5-6 lines, 8-10 JD keywords + 3-5 domain): Line 1: [Title] with {{yearsOfExperience}}+ years in [domain]. Line 2: Expertise in [domain keyword] + [3-4 JD techs with versions]. Line 3: Track record in [domain keyword] + [achievement with metric]. Line 4: Proficient in [3-4 more JD techs]. Line 5: [Soft skill] professional with Agile/leadership experience. Line 6: Focus on [2-3 JD skill areas] + scalable solutions.
 
-- Smooth transitions between bullets within each job.
-- Reduce redundancy across jobs (avoid repeating identical achievements).
-- Re-evaluate flow to ensure the document reads naturally aloud.
-- Guarantee every section has both high ATS keyword density and human readability balance.
+---
 
-YEARS OF EXPERIENCE IN SUMMARY: If the candidate has more than 10 years of experience, in the Summary refer to it ONLY as "more than 10 years" or "over 10 years". Never use the exact number (e.g. do not write 12+, 13+, 14+, 15+ years).
+**4. SKILLS** (60-80 total, 5-8 categories): Categories by JD focus (Frontend, Backend, Cloud, DevOps, Security). 8-12 skills/category. Capitalize first letter. NO version spam. Group cloud: "AWS (Lambda, S3, EC2)". 70% JD keywords + 30% complementary. Domain category if relevant (FinTech→"Payment & Compliance", Healthcare→"Healthcare Compliance", Security→"Security & Identity", Data→"Data Governance").
 
-SUMMARY OPENING: The Summary must always begin with "Senior Software Engineer" (e.g. "Senior Software Engineer with X years..." or "Senior Software Engineer with more than 10 years...").
+---
 
-SUMMARY LENGTH: The Summary must be between 700 and 800 letters. This is a hard requirement. Write a substantial, dense paragraph (or multiple paragraphs) that covers experience, key skills, technologies, achievements, and JD alignment—never fewer than 500 letters.
+**5. EXPERIENCE** ({{experienceCount}} entries, 5-7 bullets each): The **JOB DESCRIPTION IS PRIMARY**. Every bullet must be mapped to 1-3 high-priority JD requirements while still accurately reflecting the candidate's real work history. 5-7 bullets/job (recent=7, older=5). 30-35 words/bullet. 2-4 exact JD keywords/bullet. EVERY bullet needs a metric (%, $, time, scale, users). Industry context in 2-3 bullets/job. Overall targeting **ATS score ≥ 95%**.
 
-OUTPUT: Return the improved resume as a single JSON object only (no other text, no markdown). Use this exact structure. Preserve all company names, job titles, and dates from the base resume. Use **bold** for technical terms in summary and in experience details as per your bold rules. Order experience by date (most recent first). Include 8–10 bullets per role in details. If you added a Cascade Investment role, include it in experience with its company, title, dates, and details.
+**CRITICAL: JD-FIRST, DETAIL-BASED BULLETS (TARGET ATS ≥ 95%)** - ALWAYS treat the JD as the primary source for what to highlight, but the candidate's experience details as the source of truth:
+1. **Start from provided Details** - For any job that includes "Details", you MUST derive bullets from those actual accomplishments and responsibilities (do not invent unrelated work).
+2. **Align to JD for ATS** - Enhance and tailor each bullet by adding JD-relevant keywords, mapping to JD responsibilities, and ensuring strong metrics, with the explicit goal of achieving **ATS ≥ 95%**.
+3. **Maintain authenticity** - Keep the core accomplishments, seniority level, and technologies from the provided details; only refine wording, structure, and keyword usage for ATS optimization.
+4. **If no details provided** - Then (and only then) generate bullets based on the job title, company, dates, and JD requirements, ensuring JD alignment and ATS ≥ 95% while staying plausible for that role.
 
-{"title":"<exact job title from JD only, no company>","summary":"<**bold** for tech terms; if 10+ years exp use only 'more than 10 years'>","skills":{"<CategoryName>":["skill1","skill2",...],...},"experience":[{"title":"<job title>","company":"<company name>","location":"<location or empty string>","start_date":"<start>","end_date":"<end>","details":["<bullet with **bold**>",...]}]}`;
+**CRITICAL: TECHNOLOGY RELEASE DATES** - You MUST verify that every technology/framework/tool mentioned in experience bullets was actually available/released during that job's time period. Check the job dates (start_date - end_date) and ONLY use technologies that existed at that time. Examples:
+- Angular: Released 2016 → CANNOT use for jobs before 2016
+- React: Released 2013 → CANNOT use for jobs before 2013
+- TypeScript: Released 2012 → CANNOT use for jobs before 2012
+- Vue.js: Released 2014 → CANNOT use for jobs before 2014
+- Next.js: Released 2016 → CANNOT use for jobs before 2016
+- Docker: Released 2013 → CANNOT use for jobs before 2013
+- Kubernetes: Released 2014 → CANNOT use for jobs before 2014
+- AWS Lambda: Released 2014 → CANNOT use for jobs before 2014
+- GraphQL: Released 2015 → CANNOT use for jobs before 2015
+- If unsure about a technology's release date, use generic terms or older alternatives that existed at that time (e.g., for pre-2013 frontend: jQuery, Backbone.js, AngularJS 1.x; for pre-2013 backend: PHP, Java, .NET, Ruby on Rails).
+
+**Bullet:** [Action Verb] + [JD Tech that existed during job period] + [built] + [impact] + [metric]. Verbs: Architected, Engineered, Designed, Built, Developed, Implemented, Optimized, Enhanced, Led, Spearheaded, Automated, Deployed. AVOID: "Responsible for", "Worked on".
+
+**Metrics:** Performance (40% faster, 3x throughput), Scale (50K+ users, 10M+ records), Cost (saved $500K, reduced costs 35%), Time (deployment 2hrs→15min), Quality (99.9% uptime, 90% coverage), Team (led team of 10).
+
+---
+
+**ATS CHECKLIST:** Use EXACT JD phrases (not synonyms). High-priority keywords 3-4x (Skills+Summary+2-3 bullets). All required/preferred JD skills in Skills. Match tech versions. Natural flow, professional tone, varied verbs, strong metrics, domain keywords integrated.
+
+**OUTPUT FORMAT - CRITICAL:**
+You MUST return ONLY valid JSON. No markdown, no explanations, no code blocks, no text before or after the JSON.
+
+The JSON structure must be exactly:
+{
+  "title": "Job Title | Tech1 | Tech2 | Tech3 | Tech4",
+  "summary": "4-5 line summary paragraph",
+  "skills": {
+    "Category1": ["Skill1", "Skill2", "Skill3"],
+    "Category2": ["Skill4", "Skill5", "Skill6"]
+  },
+  "experience": [
+    {
+      "title": "Job Title",
+      "details": [
+        "Bullet point 1 with metric",
+        "Bullet point 2 with metric",
+        "Bullet point 3 with metric"
+      ]
+    }
+  ]
+}
+
+**REMEMBER:** Return ONLY the JSON object. Start with { and end with }. No markdown code blocks, no explanations, no other text.
+`;
 
     const prompt = resumePromptTemplate
       .replace(/\$\{baseResume\}/g, baseResume)
