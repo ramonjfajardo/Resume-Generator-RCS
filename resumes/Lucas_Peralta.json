@@ -3,7 +3,7 @@
   "email": "lucasperalta.work@outlook.com",
   "phone": "+54 9 2664 86-8833",
   "location": "Merlo, San Luis, Argentina",
-  "postalCode": "D5881",
+  "postalCode": "5881",
   "linkedin": "",
   "github": "",
   "website": "",
@@ -48,8 +48,8 @@
   
   "education": [
     {
-      "degree": "Bachelor's Degree, Computer Science",
-      "school": "Universidad Nacional de Río Negro (UNRN) | National University of Río Negro",
+      "degree": "Bachelor's Degree in Computer Science",
+      "school": "Universidad Nacional de Río Negro (UNRN)",
       "start_year": "2010",
       "end_year": "2014"
     }

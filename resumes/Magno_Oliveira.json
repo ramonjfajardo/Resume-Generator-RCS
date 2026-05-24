@@ -1,0 +1,62 @@
+{
+  "name": "Magno Werbett de Andrade Oliveira",
+  "email": "magnow.work@outlook.com",
+  "phone": "",
+  "location": "Sousa, Paraíba, Brazil",
+  "postalCode": "58808-510",
+  "linkedin": "",
+  "github": "",
+  "website": "",
+  
+  "experience": [
+    {
+      "company": "Kiggla",
+      "title": "Senior Software Engineer",
+      "location": "Florida, US",
+      "start_date": "08/2025",
+      "end_date": "Present"
+    },
+    {
+      "company": "BrightOps",
+      "title": "Software Engineer",
+      "location": "Massachusetts, US",
+      "start_date": "05/2020",
+      "end_date": "07/2025"
+    },
+    {
+      "company": "SOFTEC INFORMATICA LTDA",
+      "title": "Software Engineer",
+      "location": "Paraíba, Brazil",
+      "start_date": "01/2018",
+      "end_date": "04/2020"
+    },
+    {
+      "company": "SOFTEC INFORMATICA LTDA",
+      "title": "Junior Software Engineer",
+      "location": "Paraíba, Brazil",
+      "start_date": "01/2015",
+      "end_date": "12/2017"
+    }
+  ],
+  
+  "education": [
+    {
+      "degree": "Bachelor's Degree in Computer Science Education",
+      "school": "Universidade Federal da Paraíba",
+      "start_year": "02/2013",
+      "end_year": "12/2017"
+    },
+    {
+      "degree": "Postgraduate Degree (Lato Sensu) in Full Stack Web Development",
+      "school": "Anhanguera Educacional",
+      "start_year": "02/2023",
+      "end_year": "10/2023"
+    },
+    {
+      "degree": "Bachelor's Degree in Mathematics Education",
+      "school": "UNOPAR - Universidade Norte do Paraná",
+      "start_year": "01/2023",
+      "end_year": "12/2024"
+    }
+  ]
+}

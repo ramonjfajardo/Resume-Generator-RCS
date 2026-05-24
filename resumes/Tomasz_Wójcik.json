@@ -48,13 +48,13 @@
   
   "education": [
     {
-      "degree": "Bachelor of Science, Applied Mathematics",
+      "degree": "Bachelor of Science in Applied Mathematics",
       "school": "Shanghai Jiao Tong University",
       "start_year": "2012",
       "end_year": "2016"
     },
     {
-      "degree": "Master of Computer Technology, Artificial Intelligence",
+      "degree": "Master of Computer Technology in Artificial Intelligence",
       "school": "University of Science and Technology of China (USTC)",
       "start_year": "2017",
       "end_year": "2019"
