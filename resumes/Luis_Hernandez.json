@@ -1,0 +1,85 @@
+{
+  "name": "Luis Alberto Hernandez Trujillo",
+  "email": "luisalberto.work@outlook.com",
+  "phone": "+52 1 221 604 2771",
+  "location": "Puebla, Puebla, Mexico",
+  "postalCode": "72499",
+  "linkedin": "https://www.linkedin.com/in/chexfor/",
+  "github": "",
+  "website": "",
+  
+  "experience": [
+    {
+      "company": "Kiggla",
+      "title": "Senior full stack developer",
+      "location": "Florida, US",
+      "start_date": "10/2025",
+      "end_date": "present"
+    },
+    {
+      "company": "PLAYTRAK Sistemas de Monitoreo",
+      "title": "Full stack developer",
+      "location": "Nuevo León, Mexico",
+      "start_date": "04/2025",
+      "end_date": "09/2025"
+    },
+    {
+      "company": "Bankaool",
+      "title": "Full stack developer",
+      "location": "Mexico City, Mexico",
+      "start_date": "07/2024",
+      "end_date": "04/2025"
+    },
+    {
+      "company": "Finasist",
+      "title": "Full stack programmer",
+      "location": "Mexico City, Mexico",
+      "start_date": "04/2023",
+      "end_date": "07/2024"
+    },
+    {
+      "company": "Grupo Salinas",
+      "title": "Full stack programmer",
+      "location": "Mexico City Metropolitan Area",
+      "start_date": "05/2022",
+      "end_date": "04/2023"
+    },
+    {
+      "company": "Syntax",
+      "title": "Automation Engineer",
+      "location": "Puebla, Mexico",
+      "start_date": "12/2020",
+      "end_date": "05/2022"
+    },
+    {
+      "company": "Grupo Empresarial EISEI",
+      "title": "Software Developer",
+      "location": "Nuevo León, Mexico",
+      "start_date": "04/2019",
+      "end_date": "04/2020"
+    },
+    {
+      "company": "ISITA Fábrica de Software",
+      "title": ".NET Developer",
+      "location": "Monterrey Metropolitan Area",
+      "start_date": "11/2018",
+      "end_date": "04/2019"
+    },
+    {
+      "company": "MXGroup",
+      "title": ".NET Developer",
+      "location": "Mexico City Metropolitan Area",
+      "start_date": "01/2018",
+      "end_date": "11/2018"
+    }
+  ],
+  
+  "education": [
+    {
+      "degree": "Bachelor's Degree in Computer Science",
+      "school": "Benemérita Universidad Autónoma de Puebla",
+      "start_year": "2011",
+      "end_year": "2018"
+    }
+  ]
+}
