@@ -10,39 +10,32 @@
   
   "experience": [
     {
-      "company": "Kiggla",
+      "company": "TECLA",
       "title": "Senior Software Engineer",
       "location": "Florida, US",
-      "start_date": "10/2024",
+      "start_date": "09/2025",
       "end_date": "Present"
     },
     {
-      "company": "Nordstrom",
-      "title": "Senior Full Stack Engineer",
-      "location": "Washington, US",
-      "start_date": "08/2021",
-      "end_date": "09/2024"
-    },
-    {
-      "company": "Nubank",
-      "title": "Full Stack Engineer",
+      "company": "Baufest",
+      "title": "Software Engineer",
       "location": "Buenos Aires, Argentina",
-      "start_date": "09/2018",
-      "end_date": "05/2021"
+      "start_date": "08/2025",
+      "end_date": "07/2023"
     },
     {
-    "company": "Accenture Argentina",
-    "title": "Back End Developer",
-    "location": "Buenos Aires, Argentina",
-    "start_date": "09/2016",
-    "end_date": "08/2018"
+      "company": "Globant",
+      "title": "Software Engineer",
+      "location": "Buenos Aires, Argentina",
+      "start_date": "01/2018",
+      "end_date": "05/2023"
     },
     {
     "company": "Globant",
-    "title": "Front End Developer",
+    "title": "Junior Software Engineer",
     "location": "Buenos Aires, Argentina",
-    "start_date": "02/2015",
-    "end_date": "08/2016"
+    "start_date": "11/2016",
+    "end_date": "02/2017"
     }
   ],
   
@@ -50,8 +43,8 @@
     {
       "degree": "Bachelor's Degree in Computer Science",
       "school": "Universidad Nacional de Río Negro (UNRN)",
-      "start_year": "2010",
-      "end_year": "2014"
+      "start_year": "2012",
+      "end_year": "2016"
     }
   ]
 }
