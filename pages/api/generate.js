@@ -124,7 +124,7 @@ Include explicit database-related experience in the Professional Experience sect
 5. Place the SKILLS section immediately after the SUMMARY section and before the PROFESSIONAL EXPERIENCE section. This ensures all key stacks and technologies are visible at the top of the resume for ATS and recruiters.
 6. In the Summary, integrate the most essential and high-priority skills, stacks, and requirements from the JD, emphasizing the strongest elements from the original. Keep it dense with relevant keywords and technologies, but natural in tone.
 7. In every section (Summary, Skills, Experience), INCLUDE as many relevant unique keywords and technologies from the job description as possible.
-8. CRITICAL SKILLS SECTION: Create an EXCEPTIONALLY RICH, DENSE, and COMPREHENSIVE Skills section. Extract and list EVERY technology, tool, framework, library, service, and methodology from BOTH the JD AND candidate's experience. Make it so comprehensive it dominates keyword matching.
+8. CRITICAL SKILLS SECTION ( 6 - 8 categories): Create an EXCEPTIONALLY RICH, DENSE, and COMPREHENSIVE Skills section. Extract and list EVERY technology, tool, framework, library, service, and methodology from BOTH the JD AND candidate's experience. Make it so comprehensive it dominates keyword matching.
   8a. Include ecosystems even if not explicitly in the JD but common to that tech stack (e.g., REST, GraphQL, CI/CD).
   8b. Avoid duplicates but prioritize variety (e.g., list both "Docker" and "Containerization").
   8c. List them in STRUCTURE, Order skill groups by the JD's emphasis (frontend-first, backend-first, etc.).
